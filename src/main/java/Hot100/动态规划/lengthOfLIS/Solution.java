@@ -1,0 +1,28 @@
+package Hot100.动态规划.lengthOfLIS;
+
+import java.util.Arrays;
+
+public class Solution {
+    public static int lengthOfLIS(int[] nums) {
+        int ans = 0;
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+
+        for(int i = 0; i < dp.length; i++){
+            for(int j = 0; j < i; j++){
+                if(nums[j] < nums[i]){
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            ans = Math.max(ans, dp[i]);
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {10,9,2,5,3,7,101,18};
+        int ans = lengthOfLIS(nums);
+        System.out.println(ans);
+    }
+}
